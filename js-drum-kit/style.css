@@ -1,0 +1,62 @@
+:root {
+  --main-text-size: 10px;
+  --text-key-sound: 40px;
+  --color-key: black;
+  --color-key-name: white;
+  --color-key-active: #ffc600;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.main__container {
+  font-size: var(--main-text-size);
+  background: url(assets/background.jpeg) bottom center;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Arial, Helvetica;
+}
+
+.keys {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.keys__item {
+  border: 4px solid var(--color-key);
+  border-radius: 6px;
+  margin: 1.2rem;
+  font-size: 1.6rem;
+  padding: 1rem 0.6rem;
+  transition: all 0.08s;
+  width: 100px;
+  color: var(--color-key-name);
+  text-align: center;
+  background: rgb(0, 0, 0, 0.4);
+  text-shadow: 0 0 6px var(--color-key);
+}
+
+.keys__item_playing {
+  transform: scale(1.2);
+  border-color: var(--color-key-active);
+  box-shadow: 0 0 10px var(--color-key-active);
+}
+
+.keys__name-letter {
+  display: block;
+  font-size: var(--text-key-sound);
+}
+
+.keys__name-sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-key-active);
+}
