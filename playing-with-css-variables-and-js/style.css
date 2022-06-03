@@ -1,0 +1,38 @@
+:root {
+  --base: #ffc600;
+  --spacing: 10px;
+  --blur: 10px;
+  --page-color: #193549;
+  --text-color: white;
+}
+
+.page__image {
+  padding: var(--spacing);
+  background: var(--base);
+  filter: blur(var(--blur));
+}
+
+.page__title {
+  color: var(--text-color);
+}
+
+.page__title-js {
+  color: var(--base);
+}
+
+.page {
+  text-align: center;
+  background-color: var(--page-color);
+  color: var(--text-color);
+  font-family: "helvetica neue", sans-serif;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+.page__controls {
+  margin-bottom: 50px;
+}
+
+.page__input {
+  width: 100px;
+}
