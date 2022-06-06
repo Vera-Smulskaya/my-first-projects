@@ -13,6 +13,7 @@
   --brand-green-hover: #0b4037;
   --white: #ffffff;
   --gray-headline: #061800;
+  --black: rgb(1, 1, 1);
   --main-title: 52px;
   --main-title-mobile: 34px;
   --section-title: 40px;
@@ -78,14 +79,7 @@ html {
 
 .nav-menu__item {
   list-style-type: none;
-  display: flex;
-  padding: 26px 0;
   margin-right: 36px;
-  justify-content: space-between;
-}
-
-.nav-menu__item_underlined {
-  border-bottom: 2px solid var(--white);
 }
 
 .nav-menu__link {
@@ -105,6 +99,11 @@ html {
 .nav-menu__link:focus {
   outline: none;
   color: var(--brand-green-hover);
+}
+
+.nav-menu__item_underlined {
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--white);
 }
 
 .header__button {
@@ -172,7 +171,7 @@ html {
   font-size: var(--main-text);
   text-transform: uppercase;
   border-radius: 36px;
-  border: 1px solid #00856f;
+  border: 1px solid var(--brand-green);
   padding: 18px 34px;
   cursor: pointer;
   box-sizing: border-box;
@@ -377,7 +376,7 @@ html {
 .contact-us__map {
   text-decoration: none;
   font-style: normal;
-  color: black;
+  color: var(--black);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -821,7 +820,7 @@ html {
   }
 }
 
-#header__burger-menu {
+.header__burger-menu {
   background-color: var(--brand-green);
   display: none;
   position: fixed;
@@ -831,7 +830,7 @@ html {
   bottom: 0;
 }
 
-#header__burger-menu.visible {
+.header__burger-menu.visible {
   display: block;
 }
 
@@ -937,7 +936,7 @@ html {
   background-color: var(--white);
   width: fit-content;
   height: fit-content;
-  border: 1px solid #ccc;
+  border: 1px solid var(--brand-beige);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6;
   box-sizing: border-box;
   position: relative;
@@ -950,14 +949,14 @@ html {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: #aaa;
+  color: var(--gray-headline);
   font-size: 28px;
   font-weight: bold;
 }
 
 .modal__close:hover,
 .modal__close:focus {
-  color: black;
+  color: var(--black);
   text-decoration: none;
   cursor: pointer;
 }
@@ -975,11 +974,11 @@ html {
   margin-bottom: 20px;
   border-radius: 6px;
   width: 180px;
-  border: 1px solid #b5b5b8;
+  border: 1px solid var(--gray-headline);
 }
 
 .modal__form-input:focus {
-  border: 1px solid #2b2b2c;
+  border: 1px solid var(--gray-headline);
 }
 
 .modal__form-submit {

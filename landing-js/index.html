@@ -26,7 +26,7 @@
                     </a>
                 </div>
                 <ul class="header__nav-menu nav-menu">
-                    <li class="nav-menu__item nav-menu__item_underlined">
+                    <li class="nav-menu__item">
                         <a
                             href="#inicio"
                             class="nav-menu__link"
@@ -59,11 +59,19 @@
                         </a>
                     </li>
                 </ul>
-                <button class="header__button">Agendar consulta</button>
+                <button
+                    id="header__button"
+                    class="header__button"
+                >
+                    Agendar consulta
+                </button>
                 <div class="header__burger-button">
                     <span class="header__burger-button-item"></span>
                 </div>
-                <div id="header__burger-menu">
+                <div
+                    id="header__burger-menu"
+                    class="header__burger-menu"
+                >
                     <div class="header__mobile-menu-container">
                         <ul class="header__mobile-menu mobile-menu">
                             <li class="mobile-menu__item">
@@ -99,7 +107,12 @@
                                 </a>
                             </li>
                         </ul>
-                        <button class="header__mobile-button">Agendar consulta</button>
+                        <button
+                            id="header__mobile-button"
+                            class="header__mobile-button"
+                        >
+                            Agendar consulta
+                        </button>
                         <div class="header__social-network social-network">
                             <a
                                 href="/"
@@ -134,80 +147,86 @@
             </header>
 
             <main class="main">
-                <section class="page__start start">
-                    <a id="inicio"></a>
-                    <div class="start__block">
-                        <p class="start__name">Boas-vindas a doctorcare</p>
-                        <h1 class="start__title">
-                            Assistencia medica
-                            <br>
-                            simlificada para todos
-                        </h1>
-                        <p class="start__desc">
-                            Os médicos da DoctorCare vão além dos sintomas para tratar a causa raiz de sua doença e
+                <a id="inicio">
+                    <section class="page__start start">
+                        <div class="start__block">
+                            <p class="start__name">Boas-vindas a doctorcare</p>
+                            <h1 class="start__title">
+                                Assistencia medica
+                                <br>
+                                simlificada para todos
+                            </h1>
+                            <p class="start__desc">
+                                Os médicos da DoctorCare vão além dos sintomas para tratar a causa raiz de sua doença e
                         proporcionar
                         uma cura a longo prazo.
-                        </p>
-                        <button class="start__button-whatsapp button-whatsapp">
-                            <img
-                                class="button-whatsapp__icon"
-                                src="assets/whatsapp.svg"
-                                alt="whatsapp"
+                            </p>
+                            <button
+                                id="start__button"
+                                class="start__button-whatsapp button-whatsapp"
                             >
-                            <div>Agenta sua consulta</div>
-                        </button>
-                    </div>
-                    <div>
-                        <img
-                            class="start__img"
-                            src="img/woman.png"
-                            alt="woman"
-                        >
-                    </div>
-                </section>
-                <section class="page__amount-container">
-                    <div class="page__amount amount">
-                        <div class="amount__block">
-                            <p class="amount__sum">+3.500</p>
-                            <p class="amount__text">Pacientes atendidos</p>
+                                <img
+                                    class="button-whatsapp__icon"
+                                    src="assets/whatsapp.svg"
+                                    alt="whatsapp"
+                                >
+                                <div>Agenta sua consulta</div>
+                            </button>
                         </div>
-                        <div class="amount__block amount__block_central">
-                            <p class="amount__sum">+15</p>
-                            <p class="amount__text">Especialistas disponíveis</p>
+                        <div>
+                            <img
+                                class="start__img"
+                                src="img/woman.png"
+                                alt="woman"
+                            >
                         </div>
-                        <div class="amount__block">
-                            <p class="amount__sum">+10</p>
-                            <p class="amount__text">Anos no mercado</p>
+                    </section>
+
+                    <section class="page__amount-container">
+                        <div class="page__amount amount">
+                            <div class="amount__block">
+                                <p class="amount__sum">+3.500</p>
+                                <p class="amount__text">Pacientes atendidos</p>
+                            </div>
+                            <div class="amount__block amount__block_central">
+                                <p class="amount__sum">+15</p>
+                                <p class="amount__text">Especialistas disponíveis</p>
+                            </div>
+                            <div class="amount__block">
+                                <p class="amount__sum">+10</p>
+                                <p class="amount__text">Anos no mercado</p>
+                            </div>
                         </div>
-                    </div>
-                </section>
-                <a id="servicos"></a>
-                <section class="page__service service">
-                    <p class="service__text">Services</p>
-                    <h2 class="service__title">
-                        Como podemos ajudá-lo
+                    </section>
+                </a>
+                <a id="servicos">
+                    <section class="page__service service">
+                        <p class="service__text">Services</p>
+                        <h2 class="service__title">
+                            Como podemos ajudá-lo
                     a se sentir melhor?
-                    </h2>
-                    <div class="service__container"></div>
-                </section>
-                <a id="sobre"></a>
-                <section class="page__doc-quality doc-quality">
-                    <div>
-                        <img
-                            class="doc-quality__img"
-                            src="img/doctor-with-patients.png"
-                            alt="doctor-with-patiens"
-                        >
-                    </div>
-                    <div class="doc-quality__text">
-                        <p class="doc-quality__name">Sobre nos</p>
-                        <h2 class="doc-quality__title">
-                            Entenda quem somos
-                            <br>
-                            e por que existimos
                         </h2>
-                        <p class="doc-quality__desc">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
+                        <div class="service__container"></div>
+                    </section>
+                </a>
+                <a id="sobre">
+                    <section class="page__doc-quality doc-quality">
+                        <div>
+                            <img
+                                class="doc-quality__img"
+                                src="img/doctor-with-patients.png"
+                                alt="doctor-with-patiens"
+                            >
+                        </div>
+                        <div class="doc-quality__text">
+                            <p class="doc-quality__name">Sobre nos</p>
+                            <h2 class="doc-quality__title">
+                                Entenda quem somos
+                                <br>
+                                e por que existimos
+                            </h2>
+                            <p class="doc-quality__desc">
+                                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
                         sint. Velit officia consequat duis enim. Amet minim mollit non
                         deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
                         consequat duis enim. Amet minim mollit non deserunt ullamco est sit
@@ -215,60 +234,65 @@
                         minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
                         Velit officia consequat duis enim. Amet minim mollit non deserunt
                         ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                    </div>
-                </section>
-                <a id="depoimentos"></a>
-                <section class="page__contact-us contact-us">
-                    <div>
-                        <h2 class="contact-us__title">
-                            Entre em contato
-                            <br>
-                            com a gente!
-                        </h2>
-                        <address class="contact-us__item">
-                            <a
-                                class="contact-us__map"
-                                href="/"
-                            >
-                                <img
-                                    class="contact-us__icon"
-                                    src="assets/map.png"
-                                    alt="map"
-                                >
-                                R.Amauri Souza, 346
-                            </a>
-                        </address>
-                        <div class="contact-us__item">
-                            <a
-                                class="contact-us__email"
-                                href="mailto:contato@doctorcare.com"
-                            >
-                                <img
-                                    class="contact-us__icon"
-                                    src="assets/mail.png"
-                                    alt="mail"
-                                >
-                                contato@doctorcare.com
-                            </a>
+                            </p>
                         </div>
-                        <button class="contact-us__button-whatsapp button-whatsapp">
-                            <img
-                                class="button-whatsapp__icon"
-                                src="assets/whatsapp.svg"
-                                alt="whatsapp"
+                    </section>
+                </a>
+                <a id="depoimentos">
+                    <section class="page__contact-us contact-us">
+                        <div>
+                            <h2 class="contact-us__title">
+                                Entre em contato
+                                <br>
+                                com a gente!
+                            </h2>
+                            <address class="contact-us__item">
+                                <a
+                                    class="contact-us__map"
+                                    href="/"
+                                >
+                                    <img
+                                        class="contact-us__icon"
+                                        src="assets/map.png"
+                                        alt="map"
+                                    >
+                                    R.Amauri Souza, 346
+                                </a>
+                            </address>
+                            <div class="contact-us__item">
+                                <a
+                                    class="contact-us__email"
+                                    href="mailto:contato@doctorcare.com"
+                                >
+                                    <img
+                                        class="contact-us__icon"
+                                        src="assets/mail.png"
+                                        alt="mail"
+                                    >
+                                    contato@doctorcare.com
+                                </a>
+                            </div>
+                            <button
+                                id="contact-us__button"
+                                class="contact-us__button-whatsapp button-whatsapp"
                             >
-                            <div>Agenta sua consulta</div>
-                        </button>
-                    </div>
-                    <div>
-                        <img
-                            class="contact-us__img"
-                            src="img/man.png"
-                            alt="happy-man"
-                        >
-                    </div>
-                </section>
+                                <img
+                                    class="button-whatsapp__icon"
+                                    src="assets/whatsapp.svg"
+                                    alt="whatsapp"
+                                >
+                                <div>Agenta sua consulta</div>
+                            </button>
+                        </div>
+                        <div>
+                            <img
+                                class="contact-us__img"
+                                src="img/man.png"
+                                alt="happy-man"
+                            >
+                        </div>
+                    </section>
+                </a>
             </main>
             <footer>
                 <div class="page__footer footer">

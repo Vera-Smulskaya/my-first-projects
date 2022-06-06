@@ -6,12 +6,12 @@
 
     const visibleMenuClassName = "visible";
 
-    function toggeMenu(flag) {
-      menuButton.classList.toggle("header__burger-button_active", flag);
+    function toggleMenu(flag) {
+      menuButton.classList.toggle("header__burger-button_active");
       menuButton
         .querySelector(".header__burger-button-item")
-        .classList.toggle("header__burger-button-item_active", flag);
-      menu.classList.toggle(visibleMenuClassName, flag);
+        .classList.toggle("header__burger-button-item_active");
+      menu.classList.toggle(visibleMenuClassName);
 
       const menuIsOpened = menu.classList.contains(visibleMenuClassName);
 
@@ -23,14 +23,14 @@
     }
 
     menuButton.addEventListener("click", () => {
-      toggeMenu();
+      toggleMenu();
     });
 
     const mobileMenuLinks = document.querySelectorAll(".mobile-menu__link");
 
     mobileMenuLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        toggeMenu(false);
+        toggleMenu(false);
       });
     });
   }
@@ -92,8 +92,18 @@
   renderServices();
 
   function initModal() {
-    const buttons = document.querySelectorAll("button");
+    const headerButton = document.getElementById("header__button");
+    const headerMobileButton = document.getElementById("header__mobile-button");
+    const startButton = document.getElementById("start__button");
+    const contuctUsButton = document.getElementById("contact-us__button");
     const modal = document.getElementById("modal");
+
+    const buttons = [
+      headerButton,
+      headerMobileButton,
+      startButton,
+      contuctUsButton,
+    ];
 
     const closeButton = document.querySelector(".modal__close");
     const closeSubmit = document.querySelector(".modal__form-submit");
@@ -112,4 +122,28 @@
     });
   }
   initModal();
+
+  const anchors = document.querySelectorAll("a[id]");
+
+  function getCurrentAnchor() {
+    const underlinedClassName = "nav-menu__item_underlined";
+    const scrollYTop = window.scrollY;
+    const scrollYBottom = scrollYTop + window.innerHeight / 2;
+
+    anchors.forEach((ancor) => {
+      const ancorYTop = ancor.getBoundingClientRect().top + scrollYTop;
+      const relatedLink = document.querySelector(
+        `.nav-menu__link[href="#${ancor.id}"]`
+      );
+      relatedLink.classList.remove(underlinedClassName);
+
+      if (ancorYTop >= scrollYTop && ancorYTop < scrollYBottom) {
+        relatedLink.classList.add(underlinedClassName);
+      }
+    });
+  }
+
+  getCurrentAnchor();
+
+  window.addEventListener("scroll", getCurrentAnchor);
 })();
