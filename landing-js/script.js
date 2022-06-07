@@ -2,11 +2,11 @@
   function initBurgerMenu() {
     const menuButton = document.querySelector(".header__burger-button");
 
-    const menu = document.getElementById("header__burger-menu");
+    const menu = document.getElementById("header-burger-menu");
 
     const visibleMenuClassName = "visible";
 
-    function toggleMenu(flag) {
+    function toggleMenu() {
       menuButton.classList.toggle("header__burger-button_active");
       menuButton
         .querySelector(".header__burger-button-item")
@@ -92,10 +92,10 @@
   renderServices();
 
   function initModal() {
-    const headerButton = document.getElementById("header__button");
-    const headerMobileButton = document.getElementById("header__mobile-button");
-    const startButton = document.getElementById("start__button");
-    const contuctUsButton = document.getElementById("contact-us__button");
+    const headerButton = document.getElementById("header-button");
+    const headerMobileButton = document.getElementById("header-mobile-button");
+    const startButton = document.getElementById("start-button");
+    const contuctUsButton = document.getElementById("contact-us-button");
     const modal = document.getElementById("modal");
 
     const buttons = [
@@ -123,27 +123,56 @@
   }
   initModal();
 
-  const anchors = document.querySelectorAll("a[id]");
+  function initHeaderLinks() {
+    const anchors = document.querySelectorAll("a[id]");
 
-  function getCurrentAnchor() {
-    const underlinedClassName = "nav-menu__item_underlined";
-    const scrollYTop = window.scrollY;
-    const scrollYBottom = scrollYTop + window.innerHeight / 2;
+    function getCurrentAnchor() {
+      const underlinedClassName = "nav-menu__item_underlined";
+      const scrollYTop = window.scrollY;
+      const scrollYBottom = scrollYTop + window.innerHeight;
 
-    anchors.forEach((ancor) => {
-      const ancorYTop = ancor.getBoundingClientRect().top + scrollYTop;
-      const relatedLink = document.querySelector(
-        `.nav-menu__link[href="#${ancor.id}"]`
-      );
-      relatedLink.classList.remove(underlinedClassName);
+      let maxHeight = 0;
+      let activeMenuItem;
 
-      if (ancorYTop >= scrollYTop && ancorYTop < scrollYBottom) {
-        relatedLink.classList.add(underlinedClassName);
+      function getAnchorScreenHeight(anchor) {
+        const rect = anchor.getBoundingClientRect();
+        const elementIsOutTop = rect.y + rect.height <= 0;
+        const elementIsOutBottom = rect.y > window.innerHeight;
+        const elementWholeIsIn =
+          rect.y > 0 && rect.y + rect.height < window.innerHeight;
+
+        if (elementIsOutTop || elementIsOutBottom) {
+          return 0;
+        }
+
+        if (elementWholeIsIn) {
+          return rect.height;
+        }
+
+        return rect.y > 0 ? window.innerHeight - rect.y : rect.height + rect.y;
       }
-    });
+
+      anchors.forEach((anchor) => {
+        const relatedLink = document.querySelector(
+          `.nav-menu__link[href="#${anchor.id}"]`
+        );
+        relatedLink.classList.remove(underlinedClassName);
+
+        const anchorScreenHeight = getAnchorScreenHeight(anchor);
+
+        if (anchorScreenHeight > maxHeight) {
+          maxHeight = anchorScreenHeight;
+          activeMenuItem = relatedLink;
+        }
+      });
+
+      activeMenuItem.classList.add(underlinedClassName);
+    }
+
+    getCurrentAnchor();
+
+    window.addEventListener("scroll", getCurrentAnchor);
   }
 
-  getCurrentAnchor();
-
-  window.addEventListener("scroll", getCurrentAnchor);
+  initHeaderLinks();
 })();

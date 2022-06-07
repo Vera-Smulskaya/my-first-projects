@@ -451,6 +451,10 @@ html {
   box-shadow: 0px 0px 2px 2px var(--brand-green-hover);
 }
 
+.header__burger-menu.visible {
+  display: none;
+}
+
 @media (min-width: 750px) and (max-width: 1200px) {
   .page__header {
     padding: 0 24px 0 40px;
@@ -818,6 +822,10 @@ html {
   .page__modal {
     min-width: 328px;
   }
+
+  .header__burger-menu.visible {
+    display: block;
+  }
 }
 
 .header__burger-menu {
@@ -828,10 +836,6 @@ html {
   right: 0;
   top: 72px;
   bottom: 0;
-}
-
-.header__burger-menu.visible {
-  display: block;
 }
 
 .header__mobile-menu-container {
