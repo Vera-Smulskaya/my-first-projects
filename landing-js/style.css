@@ -403,9 +403,9 @@ html {
   text-decoration: underline var(--brand-green-text);
 }
 
-.contact-us__button-whatsapp {
-  margin-top: 40px;
-}
+ .contact-us__img {
+   margin-top: 40px;
+ }
 
 .page__footer {
   display: flex;

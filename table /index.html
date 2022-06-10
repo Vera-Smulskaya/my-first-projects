@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>The second page</title>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="page">
+
+            <aside class="page__aside aside">
+
+                <div class="aside__title">
+                    <a
+                        href="//www.figma.com/"
+                        class="aside__name"
+                    >
+                        <img
+                            src="assets/logo-aside.png"
+                            class="aside__logo"
+                            alt="logo"
+                        >
+                        E-cards
+                    </a>
+                </div>
+
+                <div class="aside__middle">
+                    <ul class="aside__menu">
+                        <li>
+                            <a
+                                href="//www.figma.com/"
+                                class="aside__menu-text aside__menu-text_ grey"
+                            >
+                                <img
+                                    src="assets/transactions-aside.png"
+                                    class="aside__menu-icon"
+                                    alt="transaction"
+                                >
+                                Transactions
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="//www.figma.com/"
+                                class="aside__menu-text"
+                            >
+                                <img
+                                    src="assets/cards-aside.png"
+                                    class="aside__menu-icon"
+                                    alt="cards"
+                                >
+                                Cards
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="aside__footer footer">
+                    <hr class="footer__horizontal-rule">
+                    <div class="footer__user-data">
+                        <div class="footer__user-avatar">
+                            <img
+                                src="assets/icon-user-aside.png"
+                                class="footer__menu-icon"
+                                alt="avatar"
+                            >
+                        </div>
+                        <div class="footer__user-info">
+                            <a
+                                href="//www.figma.com/"
+                                class="footer__user-name"
+                            >
+                                Itai Bracha
+                            </a>
+                            <a
+                                href="mailto:Itaibracha31@gmail.com"
+                                class="footer__user-mail"
+                            >
+                                Itaibracha31@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                    <ul class="aside__menu">
+                        <li>
+                            <a
+                                href="//www.figma.com/"
+                                class="aside__menu-text"
+                            >
+                                <img
+                                    src="assets/settings.png"
+                                    class="aside__menu-icon"
+                                    alt="settings"
+                                >
+                                Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="//www.figma.com/"
+                                class="aside__menu-text"
+                            >
+                                <img
+                                    src="assets/logout.png"
+                                    class="aside__menu-icon"
+                                    alt="logout"
+                                >
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="page__main-container">
+                <section class="section-cards">
+                    <p class="section-cards__title">Cards</p>
+                    <div class="section-cards__content">
+                        <div class="current-card">
+                            <div class="current-card__container">
+                                <div class="current-card__header">
+                                    <div>Current Balance</div>
+                                    <div>VISA</div>
+                                </div>
+                                <div class="current-card__sum">$4,570,80</div>
+                                <div class="current-card__number">5294 2436 4780 2468</div>
+                                <div class="current-card__footer footer">
+                                    <div class="footer__name">
+                                        NAME
+                                        <br>
+                                        Itai Bracha
+                                    </div>
+                                    <div class="footer__term">
+                                        VALID THRU
+                                        <br>
+                                        12/24
+                                    </div>
+                                    <div class="footer__cvv">
+                                        CVV
+                                        <br>
+                                        344
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new-card">
+                            <button class="new-card__button">
+                                <img
+                                    src="assets/add-card.png"
+                                    alt="assets"
+                                >
+                            </button>
+                            <p class="new-card__text">Add new Card</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-transactions">
+
+                    <p class="section-transactions__title">Transactions</p>
+                    <div class="section-transactions__content">
+                        <div class="filters">
+                            <ul class="filters__section">
+                                <li>
+                                    <label class="filters__form">
+                                        <input
+                                            id="search-transaction-name"
+                                            placeholder="Search for..."
+                                            class="filters__name filters__input"
+                                        >
+                                        <span class="filters__icon">
+                                            <img
+                                                src="assets/search.png"
+                                                alt="search"
+                                            >
+                                        </span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="filters__form">
+                                        <input
+                                            id="filter-user-name"
+                                            placeholder="User"
+                                            class="filters__name filters__input"
+                                        >
+                                        <span class="filters__icon">
+                                            <img
+                                                src="assets/user.png"
+                                                alt="User"
+                                            >
+                                        </span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="filters__form">
+                                        <input
+                                            id="filter-status-transaction"
+                                            placeholder="Status"
+                                            class="filters__name filters__input"
+                                        >
+                                        <span class="filters__icon">
+                                            <img
+                                                src="assets/plug-and-pay.png"
+                                                alt="status"
+                                            >
+                                        </span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="filters__form">
+                                        <input
+                                            id="filter-date-start-transaction"
+                                            type="date"
+                                            min="from"
+                                            max="to"
+                                            placeholder="Date transaction"
+                                            class="filters__name filters__input-data"
+                                        >
+                                        <input
+                                            id="filter-date-end-transaction"
+                                            type="date"
+                                            min="from"
+                                            max="to"
+                                            placeholder="Date transaction"
+                                            class="filters__name filters__input-data"
+                                        >
+                                    </label>
+                                </li>
+                                <li class="filters__form-push">
+                                    <form class="filters__form">
+
+                                        <select
+                                            class="filters__name filters__input"
+                                            id="sort"
+                                            name="Sort by"
+                                        >
+                                            <option
+                                                id="value-name"
+                                                value="Name"
+                                            >
+                                                Name
+                                            </option>
+                                            <option
+                                                id="value-user-credentials"
+                                                value="User credentials"
+                                            >
+                                                User credentials
+                                            </option>
+                                            <option
+                                                id="value-last-transaction"
+                                                value="Last Transaction"
+                                            >
+                                                Last Transaction
+                                            </option>
+                                            <option
+                                                id="value-status"
+                                                value="Status"
+                                            >
+                                                Status
+                                            </option>
+                                            <option
+                                                id="value-end-date"
+                                                value="End date"
+                                            >
+                                                End date
+                                            </option>
+                                            <option
+                                                id="value-total-used"
+                                                value="Total Used"
+                                            >
+                                                Total Used
+                                            </option>
+                                        </select>
+
+                                    </form>
+                                </li>
+                                <li>
+                                    <button class="filters__button-download">
+                                        <span>
+                                            <img
+                                                src="assets/download-arrow.png"
+                                                alt="download"
+                                            >
+                                        </span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                                <th
+                                    class="table__head table__head_name"
+                                    colspan="3"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="table__head"
+                                    colspan="2"
+                                >
+                                    User credentials
+                                </th>
+                                <th class="table__head">Last Transcation</th>
+                                <th class="table__head">Status</th>
+                                <th class="table__head">End date</th>
+                                <th
+                                    class="table__head"
+                                    colspan="2"
+                                >
+                                    Total Used
+                                </th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="group-page-selection">
+                            <button class="group-page-selection__button"><</button>
+                            <button class="group-page-selection__button">1</button>
+                            <button class="group-page-selection__button">2</button>
+                            <button class="group-page-selection__button">3</button>
+                            <button class="group-page-selection__button">4</button>
+                            <button class="group-page-selection__button">></button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+        </div>
+        <script src="script.js"></script>
+    </body>
+
+</html>
