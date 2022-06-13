@@ -196,29 +196,66 @@ function filterDate() {
 
 const elementSelect = document.getElementById("sort");
 const dataTransactionsCopy = [...dataTransactions];
+
+const SORTING_OFF_CLASS = "filtres__sorting_off";
+const SORTING_ASC_CLASS = "filtres__sorting_asc";
+const SORTING_DESC_CLASS = "filtres__sorting_desc";
+
+const sortButton = document.getElementById("button-sorting");
+
 function initSelect() {
   elementSelect.addEventListener("change", (event) => {
-    sortTable(event.target.value);
+    sortTable();
+  });
+
+  sortButton.addEventListener("click", () => {
+    const classList = sortButton.classList;
+    if (classList.contains(SORTING_OFF_CLASS)) {
+      classList.replace(SORTING_OFF_CLASS, SORTING_ASC_CLASS);
+      sortTable(true);
+    } else if (classList.contains(SORTING_ASC_CLASS)) {
+      classList.replace(SORTING_ASC_CLASS, SORTING_DESC_CLASS);
+      sortTable(false);
+    } else {
+      classList.replace(SORTING_DESC_CLASS, SORTING_OFF_CLASS);
+      sortTable();
+    }
   });
 }
 initSelect();
 
-function sortTable() {
+function sortTable(isAsc) {
   const sortField = elementSelect.value;
-  if (
-    sortField === "dateLastTransaction" ||
-    sortField === "dateEndTransaction"
-  ) {
-    dataTransactionsCopy.sort((a, b) => {
+
+  if (isAsc === undefined) {
+    fillTable(dataTransactions);
+
+    return;
+  }
+
+  dataTransactionsCopy.sort((a, b) => {
+    if (a[sortField] === b[sortField]) return 0;
+
+    let result;
+
+    if (
+      sortField === "dateLastTransaction" ||
+      sortField === "dateEndTransaction"
+    ) {
       const aDateSeconds = new Date(a[sortField]).getTime();
       const bDateSeconds = new Date(b[sortField]).getTime();
-      return aDateSeconds > bDateSeconds ? 1 : -1;
-    });
-  } else {
-    dataTransactionsCopy.sort((a, b) => {
-      return a[sortField] > b[sortField] ? 1 : -1;
-    });
-  }
+
+      result = aDateSeconds > bDateSeconds ? 1 : -1;
+    } else {
+      result = a[sortField] > b[sortField] ? 1 : -1;
+    }
+    
+    if (!isAsc) {
+      result = -result;
+    }
+
+    return result;
+  });
+
   fillTable(dataTransactionsCopy);
 }
-sortTable();
