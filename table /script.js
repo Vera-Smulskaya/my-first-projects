@@ -56,7 +56,7 @@ const dataTransactions = [
     sumLastTransaction: "$783.22",
     statusTransaction: "Pending",
     dateEndTransaction: "Apr 29,2022",
-    totalSum: "$783.22",
+    totalSum: "$683.22",
     iconDots: "assets/dots.png",
   },
   {
@@ -71,7 +71,7 @@ const dataTransactions = [
     sumLastTransaction: "$783.22",
     statusTransaction: "Done",
     dateEndTransaction: "Jan 12,2022",
-    totalSum: "$783.22",
+    totalSum: "$883.22",
     iconDots: "assets/dots.png",
   },
 ];
@@ -194,3 +194,31 @@ function filterDate() {
   fillTable(filteredData);
 }
 
+const elementSelect = document.getElementById("sort");
+const dataTransactionsCopy = [...dataTransactions];
+function initSelect() {
+  elementSelect.addEventListener("change", (event) => {
+    sortTable(event.target.value);
+  });
+}
+initSelect();
+
+function sortTable() {
+  const sortField = elementSelect.value;
+  if (
+    sortField === "dateLastTransaction" ||
+    sortField === "dateEndTransaction"
+  ) {
+    dataTransactionsCopy.sort((a, b) => {
+      const aDateSeconds = new Date(a[sortField]).getTime();
+      const bDateSeconds = new Date(b[sortField]).getTime();
+      return aDateSeconds > bDateSeconds ? 1 : -1;
+    });
+  } else {
+    dataTransactionsCopy.sort((a, b) => {
+      return a[sortField] > b[sortField] ? 1 : -1;
+    });
+  }
+  fillTable(dataTransactionsCopy);
+}
+sortTable();

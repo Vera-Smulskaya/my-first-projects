@@ -18,8 +18,8 @@
 }
 
 @font-face {
-  font-family: "Inter", sans-serif;
-  src: url("Inter-Regular.ttf");
+  font-family: "Inter";
+  src: url("font/Inter-Regular.ttf");
 }
 
 .page {
