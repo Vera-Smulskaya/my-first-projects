@@ -181,6 +181,11 @@ function filter(searchValue, field) {
   checkNoData(filteredData);
 }
 
+
+
+
+
+
 function initFiltersDate() {
   const elementDateStart = document.getElementById(
     "filter-date-start-transaction"
@@ -203,38 +208,56 @@ function filterDate() {
   const dateEnd = document.getElementById("filter-date-end-transaction").value;
   const dateStartSeconds = new Date(dateStart).getTime();
   const dataEndSeconds = new Date(dateEnd).getTime();
-  let filterByDate;
 
-  switch (true) {
-    case !dateStart && !dateEnd:
-      return fillTable(dataTransactions);
+  const cases = {
+    onlyStartDate: 0,
+    onlyEndDate: 1,
+    noDates: 2,
+    bothDates: 3,
+  };
+  const currentCase =
+    !dateStart && !dateEnd
+      ? cases.noDates
+      : !dateStart
+      ? cases.onlyEndDate
+      : !dateEnd
+      ? cases.onlyStartDate
+      : cases.bothDates;
 
-    case !dateStart:
-      filterByDate = (item) => {
-        const dateSeconds = item.dateLastTransaction;
-        return dateSeconds <= dataEndSeconds;
-      };
-      break;
-
-    case !dateEnd:
-      filterByDate = (item) => {
+  switch(currentCase) {
+    case cases.onlyStartDate:
+      filterTableByDate ((item) => {
         const dateSeconds = item.dateLastTransaction;
         return dateStartSeconds <= dateSeconds;
-      };
+      });
       break;
 
-    default:
-      filterByDate = (item) => {
+      case cases.onlyEndDate: 
+      filterTableByDate ((item) => {
+        const dateSeconds = item.dateLastTransaction;
+        return dateSeconds <= dataEndSeconds;
+      });
+      break;
+
+      case cases.noDates: 
+       fillTable(dataTransactions);
+       break;
+
+      case cases.bothDates: 
+      filterTableByDate ((item) => {
         const dateSeconds = item.dateLastTransaction;
         return dateStartSeconds <= dateSeconds && dateSeconds <= dataEndSeconds;
-      };
-  }
+      });
+      break;
+  }    
+}
 
+function filterTableByDate(filterByDate) {
   const filteredData = dataTransactions.filter(filterByDate);
 
   fillTable(filteredData);
   checkNoData(filteredData);
-}
+} 
 
 (() => {
   const ELEMENT_SELECT = document.getElementById("sort");

@@ -57,14 +57,21 @@ html {
   box-sizing: border-box;
 }
 
+/* .page__header_light {
+  background-color: var(--brand-green-light);
+  border-bottom: 1px solid var(--brand-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 0 124px;
+  width: 100%;
+  height: 72px;
+  box-sizing: border-box;
+} */
+
 .header__logo {
   text-decoration: none;
   cursor: pointer;
-}
-
-.header__logo-link:focus {
-  outline: none;
-  color: var(--brand-green-hover);
 }
 
 .header__logo-link {
@@ -72,6 +79,22 @@ html {
   text-decoration: none;
   font-size: 20px;
 }
+
+/* .header__logo-link_light {
+  color: var(--brand-green);
+  text-decoration: none;
+  font-size: 20px;
+} */
+
+.header__logo-link:focus {
+  outline: none;
+  color: var(--brand-green-hover);
+}
+
+/* .header__logo-link_light:focus {
+  outline: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+} */
 
 .header__nav-menu {
   display: flex;
@@ -91,10 +114,24 @@ html {
   text-decoration: none;
 }
 
+/* .nav-menu__link_light {
+  background-color: var(--brand-green-light);
+  color: var(--brand-green);
+  border: none;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+} */
+
 .nav-menu__link:active {
   outline: none;
   color: var(--brand-green-hover);
 }
+
+/* .nav-menu__link_light:active, .nav-menu__link_light:focus {
+  outline: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+} */
 
 .nav-menu__link:focus {
   outline: none;
@@ -105,6 +142,11 @@ html {
   padding-bottom: 24px;
   border-bottom: 2px solid var(--white);
 }
+
+/* .nav-menu__item_light-underlined {
+  padding-bottom: 24px;
+  border-bottom: 4px solid var(--brand-green);
+} */
 
 .header__button {
   font-size: var(--main-text);
@@ -119,6 +161,21 @@ html {
   cursor: pointer;
   white-space: nowrap;
 }
+
+/* .header__button_light {
+  font-size: var(--main-text);
+  line-height: 18px;
+  text-transform: uppercase;
+  background-color: var(--brand-green-light);
+  color: var(--brand-green);
+  border-radius: 36px;
+  border: 1px solid var(--brand-green);
+  width: 200px;
+  height: 36px;
+  cursor: pointer;
+  white-space: nowrap;
+} */
+
 
 .header__button:active {
   background-color: var(--brand-green);
