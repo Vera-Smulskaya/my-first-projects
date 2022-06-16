@@ -7,10 +7,10 @@ const dataTransactions = [
     numberCard: "***** 2468",
     userName: "Itai Brach",
     emailUser: "ItaiBracha31@gmail.com",
-    dateLastTransaction: "Jan 2,2022",
+    dateLastTransaction: 1641074400000,
     sumLastTransaction: "$783.22",
     statusTransaction: "Done",
-    dateEndTransaction: "Jan 12,2022",
+    dateEndTransaction: 1641938400000,
     totalSum: "$783.22",
     iconDots: "assets/dots.png",
   },
@@ -22,10 +22,10 @@ const dataTransactions = [
     numberCard: "***** 2468",
     userName: "Natali Bolgar",
     emailUser: "ItaiBracha31@gmail.com",
-    dateLastTransaction: "Jan 5,2022",
+    dateLastTransaction: 1641333600000,
     sumLastTransaction: "$783.22",
     statusTransaction: "Done",
-    dateEndTransaction: "Jan 20,2022",
+    dateEndTransaction: 1642629600000,
     totalSum: "$783.22",
     iconDots: "assets/dots.png",
   },
@@ -37,10 +37,10 @@ const dataTransactions = [
     numberCard: "***** 2468",
     userName: "Iren Parady",
     emailUser: "ItaiBracha31@gmail.com",
-    dateLastTransaction: "Feb 2,2022",
+    dateLastTransaction: 1643752800000,
     sumLastTransaction: "$783.22",
     statusTransaction: "Done",
-    dateEndTransaction: "Feb 12,2022",
+    dateEndTransaction: 1644616800000,
     totalSum: "$783.22",
     iconDots: "assets/dots.png",
   },
@@ -52,10 +52,10 @@ const dataTransactions = [
     numberCard: "***** 2468",
     userName: "Itai Brach",
     emailUser: "ItaiBracha31@gmail.com",
-    dateLastTransaction: "Apr 9,2022",
+    dateLastTransaction: 1649451600000,
     sumLastTransaction: "$783.22",
     statusTransaction: "Pending",
-    dateEndTransaction: "Apr 29,2022",
+    dateEndTransaction: 1651179600000,
     totalSum: "$683.22",
     iconDots: "assets/dots.png",
   },
@@ -67,10 +67,10 @@ const dataTransactions = [
     numberCard: "***** 2468",
     userName: "Itai Brach",
     emailUser: "ItaiBracha31@gmail.com",
-    dateLastTransaction: "Jan 2,2022",
+    dateLastTransaction: 1641074400000,
     sumLastTransaction: "$783.22",
     statusTransaction: "Done",
-    dateEndTransaction: "Jan 12,2022",
+    dateEndTransaction: 1641938400000,
     totalSum: "$883.22",
     iconDots: "assets/dots.png",
   },
@@ -95,6 +95,15 @@ function fillTable(data) {
     }) => {
       const classNameStatus =
         statusTransaction === "Done" ? "status_done" : "status_pending";
+
+      const options = { month: "short", day: "numeric", year: "numeric" };
+      const formatDateLastTransaction = new Date(
+        dateLastTransaction
+      ).toLocaleDateString("en-US", options);
+      const formatDateEndTransaction = new Date(
+        dateEndTransaction
+      ).toLocaleDateString("en-US", options);
+
       return `
         <tr>
             <td rowspan="2">
@@ -106,14 +115,14 @@ function fillTable(data) {
             <td class="table__item-name">${applicationName}</td>
             <td class="table__item-name">${typeCard}</td>
             <td class="table__item-name">${userName}</td>
-            <td class="table__item-name">${dateLastTransaction}</td>
+            <td class="table__item-name">${formatDateLastTransaction}</td>
             <td rowspan="2" class="${classNameStatus}">
               <div class="table__status status">
                 <div class="status__icon"></div>
                 <div>${statusTransaction}</div>
               </div>
             </td>
-            <td rowspan="2">${dateEndTransaction}</td>
+            <td rowspan="2">${formatDateEndTransaction}</td>
             <td rowspan="2" class="table__total-sum">${totalSum}</td>
             <td rowspan="2" class="table__dots">
                 <img src="${iconDots}" alt="icon"/>
@@ -137,11 +146,13 @@ function fillTable(data) {
 }
 fillTable(dataTransactions);
 
-function filter(searchValue, field) {
-  const filteredData = dataTransactions.filter((item) => {
-    return item[field].toLowerCase().includes(searchValue.toLowerCase());
-  });
-  fillTable(filteredData);
+function checkNoData(filteredData) {
+  if (filteredData.length === 0) {
+    const tableData = document.querySelector("tbody");
+    tableData.innerHTML = `<td colspan="9">
+                         <div class="table__no-data">there is no such data in the table</div>
+                         </td>`;
+  }
 }
 
 function initFilters() {
@@ -161,6 +172,14 @@ function initFilters() {
   });
 }
 initFilters();
+
+function filter(searchValue, field) {
+  const filteredData = dataTransactions.filter((item) => {
+    return item[field].toLowerCase().includes(searchValue.toLowerCase());
+  });
+  fillTable(filteredData);
+  checkNoData(filteredData);
+}
 
 function initFiltersDate() {
   const elementDateStart = document.getElementById(
@@ -183,23 +202,38 @@ function filterDate() {
   ).value;
   const dateEnd = document.getElementById("filter-date-end-transaction").value;
   const dateStartSeconds = new Date(dateStart).getTime();
-  console.log(dateEnd);
   const dataEndSeconds = new Date(dateEnd).getTime();
+  let filterByDate;
 
-  console.log({ dateStart, dateEnd });
-  const filteredData = dataTransactions.filter((item) => {
-    const date = item.dateLastTransaction;
-    const dateSeconds = new Date(date).getTime();
-    return dateStartSeconds <= dateSeconds && dateSeconds <= dataEndSeconds;
-  });
-  fillTable(filteredData);
+  switch (true) {
+    case !dateStart && !dateEnd:
+      return fillTable(dataTransactions);
 
-  console.log(filteredData);
+    case !dateStart:
+      filterByDate = (item) => {
+        const dateSeconds = item.dateLastTransaction;
+        return dateSeconds <= dataEndSeconds;
+      };
+      break;
 
-  if (filteredData.length === 0) {
-    const tableData = document.querySelector("tbody");
-    tableData.innerHTML = "<div>no data</div>";
+    case !dateEnd:
+      filterByDate = (item) => {
+        const dateSeconds = item.dateLastTransaction;
+        return dateStartSeconds <= dateSeconds;
+      };
+      break;
+
+    default:
+      filterByDate = (item) => {
+        const dateSeconds = item.dateLastTransaction;
+        return dateStartSeconds <= dateSeconds && dateSeconds <= dataEndSeconds;
+      };
   }
+
+  const filteredData = dataTransactions.filter(filterByDate);
+
+  fillTable(filteredData);
+  checkNoData(filteredData);
 }
 
 (() => {
@@ -248,19 +282,7 @@ function filterDate() {
     DATA_TRANSACTIONS_COPY.sort((a, b) => {
       if (a[sortField] === b[sortField]) return 0;
 
-      let result;
-
-      if (
-        sortField === "dateLastTransaction" ||
-        sortField === "dateEndTransaction"
-      ) {
-        const aDateSeconds = new Date(a[sortField]).getTime();
-        const bDateSeconds = new Date(b[sortField]).getTime();
-
-        result = aDateSeconds > bDateSeconds ? 1 : -1;
-      } else {
-        result = a[sortField] > b[sortField] ? 1 : -1;
-      }
+      let result = a[sortField] > b[sortField] ? 1 : -1;
 
       if (sortDirection === SORT_DIRECTION.DSC) {
         result = -result;
