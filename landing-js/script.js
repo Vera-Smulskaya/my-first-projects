@@ -176,3 +176,19 @@
 
   initHeaderLinks();
 })();
+
+
+// const header = document.querySelector("header");
+// const csrollChange = 5;
+
+// const addClassOnScroll = () => header.classList.add("page__header_light");
+// const removeClassOnScroll = () => header.classList.remove("page__header_light");
+
+// window.addEventListener("scroll", () =>{
+// let scroolPosition = window.scrollY; 
+//   if (scroolPosition >= csrollChange) {
+//     addClassOnScroll();
+//   } else { 
+//     removeClassOnScroll();
+//   }
+// })
