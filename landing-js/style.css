@@ -43,13 +43,16 @@ html {
 }
 
 .page__header {
+  width: 100%;
+  height: 72px;
+  padding: 0 24px 0 124px;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--brand-green);
-  padding: 0 24px 0 124px;
-  width: 100%;
-  height: 72px;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
@@ -73,7 +76,7 @@ html {
   color: var(--brand-green-hover);
 }
 
-.page__header_light .header__logo-link:focus {
+.header_light .header__logo-link:focus {
   outline: none;
   color: var(--brand-green-hover);
 }
@@ -96,7 +99,7 @@ html {
   text-decoration: none;
 }
 
-.page__header_light .nav-menu__link{
+.header_light .nav-menu__link {
   background-color: var(--brand-green-light);
   color: var(--brand-green);
   border: none;
@@ -120,7 +123,7 @@ html {
   border-bottom: 2px solid var(--white);
 }
 
-.page__header_light .nav-menu__item_underlined {
+.header_light .nav-menu__item_underlined {
   padding-bottom: 24px;
   border-bottom: 2px solid var(--brand-green);
 }
@@ -139,7 +142,7 @@ html {
   white-space: nowrap;
 }
 
-.page__header_light .header__button {
+.header_light .header__button {
   font-size: var(--main-text);
   line-height: 18px;
   text-transform: uppercase;
@@ -152,7 +155,6 @@ html {
   cursor: pointer;
   white-space: nowrap;
 }
-
 
 .header__button:active {
   background-color: var(--brand-green);
@@ -437,9 +439,9 @@ html {
   text-decoration: underline var(--brand-green-text);
 }
 
- .contact-us__img {
-   margin-top: 40px;
- }
+.contact-us__img {
+  margin-top: 40px;
+}
 
 .page__footer {
   display: flex;
@@ -489,7 +491,7 @@ html {
   display: none;
 }
 @media (min-width: 750px) {
-  .page__header_light {
+  .header_light {
     background-color: var(--brand-green-light);
     border-bottom: 1px solid var(--brand-green);
     display: flex;
@@ -499,9 +501,9 @@ html {
     width: 100%;
     height: 72px;
     box-sizing: border-box;
-  } 
+  }
 
-  .page__header_light .header__logo-link {
+  .header_light .header__logo-link {
     color: var(--brand-green);
     text-decoration: none;
     font-size: 20px;

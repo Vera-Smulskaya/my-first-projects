@@ -128,8 +128,6 @@
 
     function getCurrentAnchor() {
       const underlinedClassName = "nav-menu__item_underlined";
-      const scrollYTop = window.scrollY;
-      const scrollYBottom = scrollYTop + window.innerHeight;
 
       let maxHeight = 0;
       let activeMenuItem;
@@ -177,9 +175,8 @@
   initHeaderLinks();
 
   const header = document.querySelector("header");
-  const addClassOnScroll = () => header.classList.add("page__header_light");
-  const removeClassOnScroll = () =>
-    header.classList.remove("page__header_light");
+  const addClassOnScroll = () => header.classList.add("header_light");
+  const removeClassOnScroll = () => header.classList.remove("header_light");
 
   window.addEventListener("scroll", () => {
     if (window.scrollY >= 1) {
