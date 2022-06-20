@@ -78,18 +78,26 @@
   ];
 
   const ELEMENT_SELECT = document.getElementById("sort");
-  const DATA_TRANSACTIONS_COPY = [...dataTransactions];
-  const SORTING_OFF_CLASS = "filtres__sorting_off";
-  const SORTING_ASC_CLASS = "filtres__sorting_asc";
-  const SORTING_DESC_CLASS = "filtres__sorting_desc";
+  const SORTING_OFF_CLASS = "filters__sorting_off";
+  const SORTING_ASC_CLASS = "filters__sorting_asc";
+  const SORTING_DESC_CLASS = "filters__sorting_desc";
   const SORT_BUTTON = document.getElementById("button-sorting");
   const SORT_DIRECTION = {
     ASC: 0,
     DSC: 1,
     DEFAULT: 2,
   };
+  const ELEMENT_SEARCH = document.getElementById("search-transaction-name");
+  const ELEMENT_USER_NAME = document.getElementById("filter-user-name");
+  const ELEMENT_STATUS = document.getElementById("filter-status-transaction");
 
   function fillTable(data) {
+    if (data.length === 0) {
+      fillNoData();
+
+      return;
+    }
+
     const dataTransactionsTable = data.map(
       ({
         applicationName,
@@ -109,13 +117,12 @@
         const classNameStatus =
           statusTransaction === "Done" ? "status_done" : "status_pending";
 
-        const options = { month: "short", day: "numeric", year: "numeric" };
-        const formatDateLastTransaction = new Date(
-          dateLastTransaction
-        ).toLocaleDateString("en-US", options);
-        const formatDateEndTransaction = new Date(
-          dateEndTransaction
-        ).toLocaleDateString("en-US", options);
+        const formatDate = (date) =>
+          new Date(date).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          });
 
         return `
         <tr>
@@ -128,14 +135,14 @@
             <td class="table__item-name">${applicationName}</td>
             <td class="table__item-name">${typeCard}</td>
             <td class="table__item-name">${userName}</td>
-            <td class="table__item-name">${formatDateLastTransaction}</td>
+            <td class="table__item-name">${formatDate(dateLastTransaction)}</td>
             <td rowspan="2" class="${classNameStatus}">
               <div class="table__status status">
                 <div class="status__icon"></div>
                 <div>${statusTransaction}</div>
               </div>
             </td>
-            <td rowspan="2">${formatDateEndTransaction}</td>
+            <td rowspan="2">${formatDate(dateEndTransaction)}</td>
             <td rowspan="2" class="table__total-sum">${totalSum}</td>
             <td rowspan="2" class="table__dots">
                 <img src="${iconDots}" alt="icon"/>
@@ -154,51 +161,32 @@
       }
     );
 
-    const tableData = document.querySelector("tbody");
-    tableData.innerHTML = dataTransactionsTable.join("");
+    document.querySelector("tbody").innerHTML = dataTransactionsTable.join("");
   }
   fillTable(dataTransactions);
 
-  function checkNoData() {
-    const tableData = document.querySelector("tbody");
-    tableData.innerHTML = `<td colspan="9">
+  function fillNoData() {
+    document.querySelector("tbody").innerHTML = `<td colspan="9">
                          <div class="table__no-data">there is no such data in the table</div>
                          </td>`;
   }
 
-  const elementSearch = document.getElementById("search-transaction-name");
-  const elementUserName = document.getElementById("filter-user-name");
-  const elementStatus = document.getElementById("filter-status-transaction");
-
   function initFilters() {
-    elementSearch.addEventListener("input", () => {
-      filter();
-    });
-    elementUserName.addEventListener("input", () => {
-      filter();
-    });
-    elementStatus.addEventListener("input", () => {
-      filter();
-    });
+    [ELEMENT_SEARCH, ELEMENT_USER_NAME, ELEMENT_STATUS].forEach((element) =>
+      element.addEventListener("input", filter)
+    );
   }
   initFilters();
 
   function filter() {
-    const elementSearchValue = elementSearch.value;
-    const elementUserNameValue = elementUserName.value;
-    const elementStatusValue = elementStatus.value;
+    const isIncludes = (value, element) =>
+      value.toLowerCase().includes(element.value.toLowerCase());
 
     const filteredData = dataTransactions.filter((item) => {
       return (
-        item.applicationName
-          .toLowerCase()
-          .includes(elementSearchValue.toLowerCase()) &&
-        item.userName
-          .toLowerCase()
-          .includes(elementUserNameValue.toLowerCase()) &&
-        item.statusTransaction
-          .toLowerCase()
-          .includes(elementStatusValue.toLowerCase())
+        isIncludes(item.applicationName, ELEMENT_SEARCH) &&
+        isIncludes(item.userName, ELEMENT_USER_NAME) &&
+        isIncludes(item.statusTransaction, ELEMENT_STATUS)
       );
     });
 
@@ -206,20 +194,9 @@
   }
 
   function initFiltersDate() {
-    const elementDateStart = document.getElementById(
-      "filter-date-start-transaction"
+    ["filter-date-start-transaction", "filter-date-end-transaction"].forEach(
+      (id) => document.getElementById(id).addEventListener("input", filter)
     );
-
-    elementDateStart.addEventListener("input", () => {
-      filter();
-    });
-
-    const elementDateEnd = document.getElementById(
-      "filter-date-end-transaction"
-    );
-    elementDateEnd.addEventListener("input", () => {
-      filter();
-    });
   }
   initFiltersDate();
 
@@ -256,15 +233,13 @@
     switch (currentCase) {
       case cases.onlyStartDate:
         filterTableByDate((item) => {
-          const dateSeconds = item.dateLastTransaction;
-          return dateStartSeconds <= dateSeconds;
+          return dateStartSeconds <= item.dateLastTransaction;
         });
         break;
 
       case cases.onlyEndDate:
         filterTableByDate((item) => {
-          const dateSeconds = item.dateLastTransaction;
-          return dateSeconds <= dataEndSeconds;
+          return item.dateLastTransaction <= dataEndSeconds;
         });
         break;
 
@@ -285,13 +260,8 @@
 
     function filterTableByDate(filterByDate) {
       const filteredData = data.filter(filterByDate);
-
-      if (filteredData.length === 0) {
-        checkNoData();
-      } else {
-        dataObj.data = filteredData;
-        sortTable();
-      }
+      dataObj.data = filteredData;
+      sortTable();
     }
   }
 

@@ -396,7 +396,7 @@ body {
   text-decoration: none;
 }
 
-.filtres__sorting {
+.filters__sorting {
   height: 24px;
   width: 24px;
   border: 0;
@@ -405,19 +405,19 @@ body {
   cursor: pointer;
 }
 
-.filtres__sorting_off {
+.filters__sorting_off {
   background-image: url(assets/sort.png);
 }
 
-.filtres__sorting_desc {
+.filters__sorting_desc {
   background-image: url(assets/sort-descending.png);
 }
 
-.filtres__sorting_asc {
+.filters__sorting_asc {
   background-image: url(assets/sort-ascending.png);
 }
 
-.filtres__sorting:active {
+.filters__sorting:active {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
