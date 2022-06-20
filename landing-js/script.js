@@ -175,8 +175,8 @@
   initHeaderLinks();
 
   const header = document.querySelector("header");
-  const addClassOnScroll = () => header.classList.add("header_light");
-  const removeClassOnScroll = () => header.classList.remove("header_light");
+  const addClassOnScroll = () => header.classList.remove("header_light");
+  const removeClassOnScroll = () => header.classList.add("header_light");
 
   window.addEventListener("scroll", () => {
     if (window.scrollY >= 1) {
