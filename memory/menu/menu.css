@@ -1,6 +1,67 @@
+@font-face {
+  font-family: "DM Sans", sans-serif;
+  src: url("https://fonts.google.com/share?selection.family=DM%20Sans%7CLato%7COswald:wght@600");
+}
+
+:root {
+  --page-background: #411466;
+  --shadow-color: #1a012d;
+  --text-color: #f9f7fa;
+  --cards-background: #812099;
+  --color-gradient-pink: #dd03e4;
+  --color-gradient-violet: #5611ec;
+  --letters-size: 48px;
+  --extra-size: 24px;
+  --button-text-size: 16px;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: var(--page-background);
+  font-family: "DM Sans", sans-serif;
+}
+
+.page__title {
+  color: var(--text-color);
+  font-size: var(--letters-size);
+  text-shadow: 2px 2px 2px var(--shadow-color);
+  letter-spacing: 4px;
+  text-align: center;
+  padding-top: 200px;
+  text-transform: uppercase;
+}
+
+.menu__start-game, .menu__results {
+  background: linear-gradient(
+    36deg,
+    var(--color-gradient-pink),
+    var(--color-gradient-violet)
+  );
+  width: 220px;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  height: 56px;
+  cursor: pointer;
+  font-size: var(--extra-size);
+  box-shadow: 2px 2px 2px var(--shadow-color);
+  text-shadow: 1px 1px 1px var(--shadow-color);
+}
+
+.menu__start-game:active,
+.menu__results:active {
+  background-blend-mode: multiply;
+  background-color: var(--color-gradient-violet);
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.page__menu {
+  width: 500px;
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+  margin-top: 100px;
 }

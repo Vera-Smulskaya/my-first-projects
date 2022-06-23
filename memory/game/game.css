@@ -65,7 +65,7 @@ body {
   }
 
 .cards__front {
-  display: flex;
+  display: none;
   justify-content: center;
   width: 100%;
   align-self: center;
@@ -74,13 +74,13 @@ body {
 }
 
 .cards__back {
-  display: none;
-  width: 100%;
-  background-image: url(/memory/img/backgraund.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+  display: flex;
+  border: 1px solid var(--text-color);
+  width: 60px;
+  height: 60px;
+  box-shadow: 2px 2px 2px var(--shadow-color);
+  align-self: center;
+  margin: auto;
 }
 
 .menu__container {
