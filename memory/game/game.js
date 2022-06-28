@@ -1,4 +1,3 @@
-
 class Game {
   constructor(timer) {
     this._timer = timer;
@@ -6,7 +5,7 @@ class Game {
     this._cardInProcess = false;
   }
 
-  createCards() {
+  _createCards() {
     const letters = [
       "A",
       "B",
@@ -28,30 +27,32 @@ class Game {
       "R",
     ];
     const cardLetters = [...letters, ...letters];
-    this.shuffle(cardLetters);
+    this._shuffle(cardLetters);
     this.cards = cardLetters.map((letter) => {
-      return new Card(letter, (card) => {this.onCardClick(card)});
+      return new Card(letter, (card) => {
+        this._onCardClick(card);
+      });
     });
-    this.renderCards();
+    this._renderCards();
   }
 
-  renderCards() {
+  _renderCards() {
     const cardList = document.getElementById("card-list");
     this.cards.forEach((card) => {
       cardList.appendChild(card.element);
     });
   }
 
-  shuffle(array) {
+  _shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
 
   start() {
-    this.createCards();
+    this._createCards();
     this._timer.start();
   }
 
-  onCardClick(card) {
+  _onCardClick(card) {
     if (card === this._openedCard || card.isFinished || this._cardInProcess) {
       return;
     }
@@ -60,12 +61,12 @@ class Game {
       card.open();
       this._openedCard = card;
       return;
-    } 
+    }
 
-    if (card._id === this._openedCard._id) {
+    if (card.key === this._openedCard.key) {
       card.open();
-      card.isFinished = true;
-      this._openedCard.isFinished = true;
+      card.markAsFinished();
+      this._openedCard.markAsFinished();
       this._openedCard = null;
     } else {
       card.open();
@@ -75,21 +76,24 @@ class Game {
         this._openedCard.close();
         this._openedCard = null;
         this._cardInProcess = false;
-      }, 1000)  
+      }, 1000);
     }
-    
   }
 }
 
 class Card {
-  constructor(id, handleClick) {
-    this._id = id;
+  constructor(key, handleClick) {
+    this._key = key;
     this._isFinished = false;
     this._element = document.createElement("div");
     this._element.onclick = () => {
       handleClick(this);
     };
     this._element.className = "cards__back";
+  }
+
+  get key() {
+    return this._key;
   }
 
   get element() {
@@ -100,12 +104,12 @@ class Card {
     return this._isFinished;
   }
 
-  set isFinished(flag) {
-    this._isFinished = flag;
+  markAsFinished() {
+    this._isFinished = true;
   }
 
   open() {
-    this._element.innerText = this._id;
+    this._element.innerText = this._key;
   }
 
   close() {
@@ -148,4 +152,4 @@ class Timer {
 
 const timer = new Timer();
 const game = new Game(timer);
-game.createCards();
+game._createCards();
