@@ -1,46 +1,11 @@
-//  class Card {
-//     constructor(cardSelector, handleCardClickFunction) {
-//         this._cardSelector = cardSelector;
-//         this._element = this._getElement();
-//         this._handleCardClick = handleCardClickFunction;
-//       }
-// }
-
-// const arrLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
-
-// const arrCards = [...arrLetters, ...arrLetters];
-
-// function shuffle(array) {
-//     array.sort(() => Math.random() - 0.5);
-//     console.log(array);
-//   }
-//   shuffle(arrCards);
-
-//   function renderCard(letter) {
-//     return `<div class="cards__front">${letter}</div>`
-//   }
-
-//  function renderCards() {
-//  const listElement = document.getElementById('card-list');
-//  const cardsHtml = arrCards.map(renderCard).join('');
-//  listElement.innerHTML = cardsHtml;
-//  }
-//  renderCards();
-
-// arrCards.forEach(card => {
-//         card.addEventListener("click", flipCard);
-// })
-
-// function flipCard() {
-//     // document.getElementById("back").style.display = "none";
-//     // document.getElementById("front").style.display = "flex";
-//     }
-// flipCard();
 
 class Game {
   constructor(timer) {
     this._timer = timer;
+    this._openedCard = null;
+    this._cardInProcess = false;
   }
+
   createCards() {
     const letters = [
       "A",
@@ -64,11 +29,87 @@ class Game {
     ];
     const cardLetters = [...letters, ...letters];
     this.shuffle(cardLetters);
+    this.cards = cardLetters.map((letter) => {
+      return new Card(letter, (card) => {this.onCardClick(card)});
+    });
+    this.renderCards();
+  }
+
+  renderCards() {
+    const cardList = document.getElementById("card-list");
+    this.cards.forEach((card) => {
+      cardList.appendChild(card.element);
+    });
   }
 
   shuffle(array) {
     array.sort(() => Math.random() - 0.5);
-    console.log(array);
+  }
+
+  start() {
+    this.createCards();
+    this._timer.start();
+  }
+
+  onCardClick(card) {
+    if (card === this._openedCard || card.isFinished || this._cardInProcess) {
+      return;
+    }
+
+    if (!this._openedCard) {
+      card.open();
+      this._openedCard = card;
+      return;
+    } 
+
+    if (card._id === this._openedCard._id) {
+      card.open();
+      card.isFinished = true;
+      this._openedCard.isFinished = true;
+      this._openedCard = null;
+    } else {
+      card.open();
+      this._cardInProcess = true;
+      setTimeout(() => {
+        card.close();
+        this._openedCard.close();
+        this._openedCard = null;
+        this._cardInProcess = false;
+      }, 1000)  
+    }
+    
+  }
+}
+
+class Card {
+  constructor(id, handleClick) {
+    this._id = id;
+    this._isFinished = false;
+    this._element = document.createElement("div");
+    this._element.onclick = () => {
+      handleClick(this);
+    };
+    this._element.className = "cards__back";
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  get isFinished() {
+    return this._isFinished;
+  }
+
+  set isFinished(flag) {
+    this._isFinished = flag;
+  }
+
+  open() {
+    this._element.innerText = this._id;
+  }
+
+  close() {
+    this._element.innerText = "";
   }
 }
 
@@ -94,9 +135,9 @@ class Timer {
   }
 
   stop() {
-    if(this._startTime) {
-    this._stopTime = Date.now();
-  }
+    if (this._startTime) {
+      this._stopTime = Date.now();
+    }
   }
 
   reset() {
@@ -108,4 +149,3 @@ class Timer {
 const timer = new Timer();
 const game = new Game(timer);
 game.createCards();
-

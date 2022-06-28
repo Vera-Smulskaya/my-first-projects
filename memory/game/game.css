@@ -85,6 +85,12 @@ body {
   cursor: pointer;
   box-shadow: 2px 2px 2px var(--shadow-color);
   margin: 16px;
+  color: var(--text-color);
+  box-shadow: 2px 2px 2px var(--shadow-color);
+  align-items: center;
+  justify-content: center;
+  font-size: var(--letters-size);
+  text-shadow: 2px 2px 2px var(--shadow-color);
 }
 
 .menu__container {
