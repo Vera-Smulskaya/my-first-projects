@@ -3,6 +3,7 @@ class Game {
     this._timer = timer;
     this._openedCard = null;
     this._cardInProcess = false;
+    this._finishedPairs = 0;
   }
 
   _createCards() {
@@ -37,7 +38,7 @@ class Game {
   }
 
   _renderCards() {
-    const cardList = document.getElementById("card-list");
+    const cardList = document.getElementById("cards-list");
     this.cards.forEach((card) => {
       cardList.appendChild(card.element);
     });
@@ -50,6 +51,16 @@ class Game {
   start() {
     this._createCards();
     this._timer.start();
+  }
+
+  _finish() {
+    this._timer.stop();
+  }
+
+  _checkFinishGame() {
+    if (this._finishedPairs === this.cards.length / 2) {
+      this._finish();
+    }
   }
 
   _onCardClick(card) {
@@ -68,6 +79,8 @@ class Game {
       card.markAsFinished();
       this._openedCard.markAsFinished();
       this._openedCard = null;
+      this._finishedPairs++;
+      this._checkFinishGame();
     } else {
       card.open();
       this._cardInProcess = true;
@@ -86,10 +99,10 @@ class Card {
     this._key = key;
     this._isFinished = false;
     this._element = document.createElement("div");
+    this._element.className = "cards-list__back";
     this._element.onclick = () => {
       handleClick(this);
     };
-    this._element.className = "cards__back";
   }
 
   get key() {
@@ -121,6 +134,8 @@ class Timer {
   constructor() {
     this._startTime = null;
     this._stopTime = null;
+    this._element = document.querySelector(".timer__content");
+    this.showTime();
   }
 
   get time() {
@@ -133,14 +148,26 @@ class Timer {
     }
   }
 
+  get formatedTime() {
+    return new Date(this.time).toUTCString().split(" ")[4];
+  }
+
+  showTime() {
+    this._element.innerText = this.formatedTime;
+  }
+
   start() {
     this._stopTime = null;
     this._startTime = Date.now();
+    this._showTimeInterval = setInterval(() => {
+      this.showTime();
+    }, 1000);
   }
 
   stop() {
     if (this._startTime) {
       this._stopTime = Date.now();
+      clearInterval(this._showTimeInterval);
     }
   }
 
@@ -152,4 +179,4 @@ class Timer {
 
 const timer = new Timer();
 const game = new Game(timer);
-game._createCards();
+game.start();

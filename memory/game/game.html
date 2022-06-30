@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory</title>
-    <link rel ="stylesheet" href="game.css">
-</head>
-<body class="page">
-    <header class="page__timer timer">
-        <div class="timer__content">00:00:00</div>
-    </header>
-    <main id="card-list" class="page__cards cards">
-        
-    </main>
-    <footer class="page__menu menu">
-        <div class="menu__container">
-           <button class="menu__start-page">menu</button>
-           <button class="menu__results">results</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <title>Memory</title>
+        <link rel="stylesheet" href="game.css">
+    </head>
+    <body class="page">
+        <div class="page__container">
+            <header class="page__timer timer">
+                <div class="timer__content">00:00:00</div>
+            </header>
+            <main
+                id="cards-list"
+                class="page__cards-list cards-list"
+            >
+            <div
+            id="modal"
+            class="page__modal modal"
+            >
+                <div class="modal__content">
+                    <span class="modal__close">&times</span>
+                    <form class="modal__block">
+                        <label
+                            class="modal__form-label"
+                            for="name"
+                        >
+                        Сongratulations. Please, write your name:
+                        </label>
+                        <div>
+                            <input
+                                class="modal__form-input"
+                                type="text"
+                                id="name"
+                                name="name of gamer"
+                                placeholder="Your name"
+                            >
+                        </div>
+                        <div>
+                            <input
+                                class="modal__form-submit"
+                                type="submit"
+                                value="Send"
+                            >
+                        </div>
+                    </form>
+                </div>
+            </div>    
+            </main>
+            <footer class="page__menu menu">
+                <div class="menu__container">
+                    <button class="menu__start-page">menu</button>
+                    <button class="menu__results">results</button>
+                </div>
+            </footer>
         </div>
-    </footer>
-
-    <script src="game.js"></script>
-</body>
-</html> 
+        <script src="game.js"></script>
+    </body>
+</html>

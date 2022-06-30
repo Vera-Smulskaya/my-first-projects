@@ -19,9 +19,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+}
+
+.page__container {
   background-color: var(--page-background);
   font-family: "DM Sans", sans-serif;
+  height: 100vh;
+  display: flex;
 }
 
 .page__table {
@@ -31,7 +35,6 @@ body {
   box-sizing: border-box;
   width: 80%;
   margin: auto;
-  margin-top: 200px;
 }
 
 .table__header {
@@ -60,7 +63,8 @@ body {
   border: 1px solid var(--text-color);
 }
 
-.table__row, .table__data {
+.table__row,
+.table__data {
   border: 1px solid var(--text-color);
   height: 60px;
 }
