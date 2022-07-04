@@ -47,33 +47,10 @@ body {
   color: var(--text-color);
 }
 
-/* .cards-list__front {
-  box-sizing: border-box;
-  display: flex;
-  background: linear-gradient(
-    36deg,
-    var(--color-gradient-pink),
-    var(--color-gradient-violet)
-  );
-  width: 90px;
-  height: 90px;
-  margin: 16px;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  box-shadow: 2px 2px 2px var(--shadow-color);
-  align-items: center;
-  justify-content: center;
-  font-size: var(--letters-size);
-  text-shadow: 2px 2px 2px var(--shadow-color);
-  cursor: pointer;
-  transform: rotate(180deg);
-} */
-
-.cards-list__front:active, .cards-list__back:active {
+.cards-list__back:active {
     cursor: pointer;
     transform: scale(0.97);
     transition: transform .2s;
-    transform: rotate(180deg)
   }
 
 .cards-list__back {
@@ -158,7 +135,6 @@ body {
     var(--color-gradient-pink),
     var(--color-gradient-violet)
   );
-  /* background-color: #411466; */
   width: fit-content;
   height: fit-content;
   border: 1px solid var(--color-text-modal);
@@ -215,6 +191,9 @@ body {
 
 .modal__form-submit {
   border-radius: 8px;
+  background-color: var(--color-gradient-violet);
+  color: var(--text-color);
+  text-shadow: 2px 2px 2px var(--shadow-color);
   width: 180px;
   height: 30px;
   cursor: pointer;

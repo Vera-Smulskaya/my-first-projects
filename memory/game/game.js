@@ -6,26 +6,31 @@ class Game {
     this._finishedPairs = 0;
   }
 
+  start() {
+    this._createCards();
+    this._timer.start();
+  }
+
   _createCards() {
     const letters = [
       "A",
       "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
+      // "C",
+      // "D",
+      // "E",
+      // "F",
+      // "G",
+      // "H",
+      // "I",
+      // "J",
+      // "K",
+      // "L",
+      // "M",
+      // "N",
+      // "O",
+      // "P",
+      // "Q",
+      // "R",
     ];
     const cardLetters = [...letters, ...letters];
     this._shuffle(cardLetters);
@@ -48,13 +53,12 @@ class Game {
     array.sort(() => Math.random() - 0.5);
   }
 
-  start() {
-    this._createCards();
-    this._timer.start();
-  }
-
   _finish() {
     this._timer.stop();
+    const modal = new Modal();
+    modal.open();
+    const store = new Store("gameResults");
+    // store.add({name: , time: this._timer.time});
   }
 
   _checkFinishGame() {
@@ -180,3 +184,75 @@ class Timer {
 const timer = new Timer();
 const game = new Game(timer);
 game.start();
+
+// _renderCards() {
+//   const cardList = document.getElementById("cards-list");
+//   this.cards.forEach((card) => {
+//     cardList.appendChild(card.element);
+//   });
+// }
+class Render {
+  construstor() {
+    //render()
+  }
+}
+
+class Store {
+  constructor(key) {
+    this._key = key;
+  }
+
+  add(item) {
+    const gameResults = this.getData();
+    gameResults.push(item);
+    const newGameResultsString = JSON.stringify(gameResults);
+    localStorage.setItem(this._key, newGameResultsString);
+  }
+
+  getData() {
+    const gameResultsString = localStorage.getItem(this._key);
+    let gameResults = [];
+    if (gameResultsString) {
+      gameResults = JSON.parse(gameResultsString);
+    }
+    return gameResults;
+  }
+}
+
+class Modal {
+  constructor() {
+    this._modalBlock = document.getElementById("modal");
+    this._modalClose = document.querySelector(".modal__close");
+    this._modalClose.onclick = () => this._close();
+    this._buttonClick = document.querySelector(".modal__form-submit");
+    this._buttonClick.onclick = () => this._close();
+  }
+
+  open() {
+    this._modalBlock.classList.add("modal_active");
+  }
+
+  _close() {
+    this._modalBlock.classList.remove("modal_active");
+  }
+}
+
+(() => {
+  const menuButton = document.querySelector(".menu__start-page");
+  const menuResultsButton = document.querySelector(".menu__results");
+
+  menuButton.addEventListener("click", movePageMenu);
+  menuResultsButton.addEventListener("click", movePageResults);
+
+  function movePageMenu() {
+    document.location.assign(
+      "file:///Users/Vera/Desktop/js/memory/menu/menu.html"
+    );
+  }
+
+  function movePageResults() {
+    document.location.assign(
+      "file:///Users/Vera/Desktop/js/memory/results/results.html"
+    );
+  }
+})();

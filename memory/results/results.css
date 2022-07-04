@@ -33,7 +33,7 @@ body {
   box-shadow: 2px 2px 2px var(--shadow-color);
   border-collapse: collapse;
   box-sizing: border-box;
-  width: 80%;
+  width: 60%;
   margin: auto;
 }
 
@@ -53,10 +53,10 @@ body {
 }
 
 .table__body {
-  font-size: 0.9em;
   color: var(--text-color);
-  font-size: var(--button-text-size);
+  font-size: var(--extra-size);
   text-shadow: 1px 1px 1px var(--shadow-color);
+  text-align: center;
 }
 
 .table__header-item {
