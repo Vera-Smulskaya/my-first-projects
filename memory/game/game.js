@@ -53,12 +53,15 @@ class Game {
     array.sort(() => Math.random() - 0.5);
   }
 
+  _saveResults(playerName) {
+    const store = new Store("gameResults");
+    store.add({ name: playerName, time: this._timer.time });
+  }
+
   _finish() {
     this._timer.stop();
-    const modal = new Modal();
+    const modal = new Modal(this._saveResults.bind(this));
     modal.open();
-    const store = new Store("gameResults");
-    // store.add({name: , time: this._timer.time});
   }
 
   _checkFinishGame() {
@@ -220,12 +223,21 @@ class Store {
 }
 
 class Modal {
-  constructor() {
+  constructor(onSendClick) {
     this._modalBlock = document.getElementById("modal");
     this._modalClose = document.querySelector(".modal__close");
     this._modalClose.onclick = () => this._close();
     this._buttonClick = document.querySelector(".modal__form-submit");
-    this._buttonClick.onclick = () => this._close();
+    const inputElement = document.getElementById("name");
+    inputElement.oninput = (event) => {
+      const nameIsEmpty = event.target.value === "";
+      this.__buttonClick.disabled = nameIsEmpty;
+    };
+    this._buttonClick.onclick = () => {
+      onSendClick(inputElement.value);
+      this._close();
+      return false;
+    };
   }
 
   open() {
@@ -236,23 +248,3 @@ class Modal {
     this._modalBlock.classList.remove("modal_active");
   }
 }
-
-(() => {
-  const menuButton = document.querySelector(".menu__start-page");
-  const menuResultsButton = document.querySelector(".menu__results");
-
-  menuButton.addEventListener("click", movePageMenu);
-  menuResultsButton.addEventListener("click", movePageResults);
-
-  function movePageMenu() {
-    document.location.assign(
-      "file:///Users/Vera/Desktop/js/memory/menu/menu.html"
-    );
-  }
-
-  function movePageResults() {
-    document.location.assign(
-      "file:///Users/Vera/Desktop/js/memory/results/results.html"
-    );
-  }
-})();

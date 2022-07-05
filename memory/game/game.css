@@ -96,6 +96,9 @@ body {
   font-size: var(--button-text-size);
   box-shadow: 2px 2px 2px var(--shadow-color);
   text-shadow: 1px 1px 1px var(--shadow-color);
+  text-decoration: none;
+  text-align: center;
+  line-height: 26px;
 }
 
 .menu__start-page:active,
