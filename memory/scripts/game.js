@@ -1,3 +1,5 @@
+import Store from "./comon.js";
+
 class Game {
   constructor(timer) {
     this._timer = timer;
@@ -188,40 +190,6 @@ const timer = new Timer();
 const game = new Game(timer);
 game.start();
 
-// _renderCards() {
-//   const cardList = document.getElementById("cards-list");
-//   this.cards.forEach((card) => {
-//     cardList.appendChild(card.element);
-//   });
-// }
-class Render {
-  construstor() {
-    //render()
-  }
-}
-
-class Store {
-  constructor(key) {
-    this._key = key;
-  }
-
-  add(item) {
-    const gameResults = this.getData();
-    gameResults.push(item);
-    const newGameResultsString = JSON.stringify(gameResults);
-    localStorage.setItem(this._key, newGameResultsString);
-  }
-
-  getData() {
-    const gameResultsString = localStorage.getItem(this._key);
-    let gameResults = [];
-    if (gameResultsString) {
-      gameResults = JSON.parse(gameResultsString);
-    }
-    return gameResults;
-  }
-}
-
 class Modal {
   constructor(onSendClick) {
     this._modalBlock = document.getElementById("modal");
@@ -231,7 +199,7 @@ class Modal {
     const inputElement = document.getElementById("name");
     inputElement.oninput = (event) => {
       const nameIsEmpty = event.target.value === "";
-      this.__buttonClick.disabled = nameIsEmpty;
+      this._buttonClick.disabled = nameIsEmpty;
     };
     this._buttonClick.onclick = () => {
       onSendClick(inputElement.value);
@@ -248,3 +216,4 @@ class Modal {
     this._modalBlock.classList.remove("modal_active");
   }
 }
+
