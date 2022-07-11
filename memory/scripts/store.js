@@ -20,6 +20,3 @@ class Store {
     }
   }
   
-//   const resultString = localStorage.getItem("gameResults");
-//   const result = JSON.parse(resultString);
-//   console.log(result[0]);

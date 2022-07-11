@@ -77,7 +77,7 @@ body {
 }
 
 .menu__container {
-  width: 300px;
+  width: 500px;
   display: flex;
   margin: auto;
   justify-content: space-around;
@@ -85,9 +85,10 @@ body {
 }
 
 .menu__start-page,
-.menu__results {
+.menu__results,
+.menu__start-new-game {
   background-color: var(--color-gradient-pink);
-  width: 120px;
+  width: 140px;
   color: var(--text-color);
   border-radius: 36px;
   border: 1px solid var(--text-color);
@@ -102,12 +103,14 @@ body {
 }
 
 .menu__start-page:active,
-.menu__results:active {
+.menu__results:active,
+.menu__start-new-game:active {
   background-color: var(--color-gradient-violet);
 }
 
 .menu__start-page:focus,
-.menu__results:focus {
+.menu__results:focus
+.menu__start-new-game:focus {
   outline: none;
   background-color: var(--color-gradient-violet);
 }

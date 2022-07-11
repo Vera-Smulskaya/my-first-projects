@@ -1,5 +1,3 @@
-import Store from "./comon.js";
-
 class Game {
   constructor(timer) {
     this._timer = timer;
@@ -166,6 +164,7 @@ class Timer {
   }
 
   start() {
+    [];
     this._stopTime = null;
     this._startTime = Date.now();
     this._showTimeInterval = setInterval(() => {
@@ -216,4 +215,3 @@ class Modal {
     this._modalBlock.classList.remove("modal_active");
   }
 }
-
