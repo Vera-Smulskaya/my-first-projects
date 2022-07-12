@@ -4,12 +4,12 @@
 }
 
 :root {
-  --page-background: #411466;
+  --page-background: #3c1c74;
   --shadow-color: #1a012d;
   --text-color: #f9f7fa;
-  --cards-background: #812099;
-  --color-gradient-pink: #dd03e4;
-  --color-gradient-violet: #5611ec;
+  --color-gradient-pink: #ac0379;
+  --color-gradient-violet: #1e00a4;
+  --color-text-modal: #0f0f10; 
   --letters-size: 48px;
   --extra-size: 24px;
   --button-text-size: 16px;
@@ -38,13 +38,24 @@ body {
   letter-spacing: 4px;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 100px;
+  margin-bottom: 0;
+}
+
+.page__rules {
+  color: var(--text-color);
+  font-size: var(--extra-size);
+  text-shadow: 2px 2px 2px var(--shadow-color);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-right: 150px;
+  margin-left: 150px;
 }
 
 .page__menu {
   width: 500px;
   display: flex;
   justify-content: space-around;
+  margin-top: 40px;
 }
 
 .menu__start-game,

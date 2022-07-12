@@ -4,12 +4,11 @@
 }
 
 :root {
-  --page-background: #411466;
+  --page-background: #3c1c74;
   --shadow-color: #1a012d;
   --text-color: #f9f7fa;
-  --cards-background: #812099;
-  --color-gradient-pink: #dd03e4;
-  --color-gradient-violet: #5611ec;
+  --color-gradient-pink: #ac0379;
+  --color-gradient-violet: #1e00a4;
   --color-text-modal: #0f0f10; 
   --letters-size: 48px;
   --extra-size: 24px;
@@ -47,33 +46,58 @@ body {
   color: var(--text-color);
 }
 
-.cards-list__back:active {
-    cursor: pointer;
-    transform: scale(0.97);
-    transition: transform .2s;
-  }
+.cards-list__container {
+  background-color: transparent;
+  width: 90px;
+  height: 90px; 
+  margin: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+  perspective: 1000px;
+}
 
-.cards-list__back {
-    box-sizing: border-box;
-  display: flex;
+.cards-list__card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.cards-list__container_opened .cards-list__card-inner {
+  transform: rotateY(180deg);
+}
+
+.cards-list__card-front, .cards-list__card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+}
+
+.cards-list__card-front {
+  background-image: url(/memory/assets/backgraund.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.cards-list__card-back {
   background: linear-gradient(
     36deg,
     var(--color-gradient-pink),
     var(--color-gradient-violet)
   );
-  width: 90px;
-  height: 90px;
-  margin: 16px;
-  border: 1px solid var(--text-color);
-  cursor: pointer;
-  box-shadow: 2px 2px 2px var(--shadow-color);
-  margin: 16px;
   color: var(--text-color);
   box-shadow: 2px 2px 2px var(--shadow-color);
   align-items: center;
+  display: flex;
   justify-content: center;
   font-size: var(--letters-size);
   text-shadow: 2px 2px 2px var(--shadow-color);
+  transform: rotateY(180deg);
 }
 
 .menu__container {
@@ -204,3 +228,4 @@ body {
   height: 30px;
   cursor: pointer;
 }
+

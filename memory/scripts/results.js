@@ -20,3 +20,4 @@ class Results {
 }
 
 const results = new Results();
+

@@ -15,22 +15,22 @@ class Game {
     const letters = [
       "A",
       "B",
-      // "C",
-      // "D",
-      // "E",
-      // "F",
-      // "G",
-      // "H",
-      // "I",
-      // "J",
-      // "K",
-      // "L",
-      // "M",
-      // "N",
-      // "O",
-      // "P",
-      // "Q",
-      // "R",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
     ];
     const cardLetters = [...letters, ...letters];
     this._shuffle(cardLetters);
@@ -106,7 +106,17 @@ class Card {
     this._key = key;
     this._isFinished = false;
     this._element = document.createElement("div");
-    this._element.className = "cards-list__back";
+    this._element.className = "cards-list__container";
+
+    this._element.innerHTML = `
+   <div class="cards-list__card-inner">
+    <div class="cards-list__card-front">
+    </div>
+    <div class="cards-list__card-back">${key}
+    </div>
+  </div>
+   `;
+
     this._element.onclick = () => {
       handleClick(this);
     };
@@ -129,11 +139,11 @@ class Card {
   }
 
   open() {
-    this._element.innerText = this._key;
+    this._element.classList.add("cards-list__container_opened");
   }
 
   close() {
-    this._element.innerText = "";
+    this._element.classList.remove("cards-list__container_opened");
   }
 }
 

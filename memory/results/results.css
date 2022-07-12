@@ -4,12 +4,12 @@
 }
 
 :root {
-  --page-background: #411466;
+  --page-background: #3c1c74;
   --shadow-color: #1a012d;
   --text-color: #f9f7fa;
-  --cards-background: #812099;
-  --color-gradient-pink: #dd03e4;
-  --color-gradient-violet: #5611ec;
+  --color-gradient-pink: #ac0379;
+  --color-gradient-violet: #1e00a4;
+  --color-text-modal: #0f0f10; 
   --letters-size: 48px;
   --extra-size: 24px;
   --button-text-size: 16px;
@@ -26,18 +26,26 @@ body {
   font-family: "DM Sans", sans-serif;
   height: 100vh;
   display: flex;
+  flex-direction: column;
 }
 
 .page__table {
+  display: block;
   border: 1px solid var(--text-color);
   box-shadow: 2px 2px 2px var(--shadow-color);
   border-collapse: collapse;
   box-sizing: border-box;
   width: 60%;
+  height: 750px;
   margin: auto;
+  overflow-y: scroll;
 }
 
 .table__header {
+  display: table; 
+  width: 100%;
+  position: sticky;
+  top: 0;
   color: var(--text-color);
   font-size: var(--extra-size);
   text-shadow: 1px 1px 1px var(--shadow-color);
@@ -53,18 +61,64 @@ body {
 }
 
 .table__body {
+  display: table; 
+  width: 100%;
+  height: 710px;
   color: var(--text-color);
   font-size: var(--extra-size);
   text-shadow: 1px 1px 1px var(--shadow-color);
   text-align: center;
+  overflow-y: scroll;
+}
+
+.table__body::-webkit-scrollbar {
+  width: 0;
 }
 
 .table__header-item {
   border: 1px solid var(--text-color);
+  width: 50%;
 }
 
 .table__row,
 .table__data {
   border: 1px solid var(--text-color);
   height: 60px;
+  width: 50%;
+}
+
+.menu__container {
+  width: 350px;
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.menu__start-page,
+.menu__start-new-game {
+  background-color: var(--color-gradient-pink);
+  width: 140px;
+  color: var(--text-color);
+  border-radius: 36px;
+  border: 1px solid var(--text-color);
+  height: 26px;
+  cursor: pointer;
+  font-size: var(--button-text-size);
+  box-shadow: 2px 2px 2px var(--shadow-color);
+  text-shadow: 1px 1px 1px var(--shadow-color);
+  text-decoration: none;
+  text-align: center;
+  line-height: 26px;
+}
+
+.menu__start-page:active,
+.menu__start-new-game:active {
+  background-color: var(--color-gradient-violet);
+}
+
+.menu__start-page:focus,
+.menu__start-new-game:focus {
+  outline: none;
+  background-color: var(--color-gradient-violet);
 }
