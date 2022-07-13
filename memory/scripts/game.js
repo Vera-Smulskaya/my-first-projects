@@ -1,71 +1,36 @@
-class DataProvider {
-  getData() {
-    const letters = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-    ];
-    const lettersPairs = [...letters, ...letters];
-    return this._shuffle(lettersPairs);
-  }
-
-  _shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
-  }
-}
-
-class Render {
-  renderList(selector, listItems) {
-    const listElement = document.querySelector(selector);
-
-    listItems.forEach((item) => {
-      listElement.appendChild(item);
-    });
-  }
-
-  createElement(tagName, className, content, onclick) {
-    const element = document.createElement(tagName);
-    element.className = className;
-
-    element.innerHTML = content;
-
-    element.onclick = onclick;
-
-    return element;
-  }
-}
-
 class Game {
   constructor(timer, dataProvider, render) {
     this._timer = timer;
-    this._dataProvider = dataProvider;
-    this._render = render;
-    this._openedCard = null;
-    this._cardInProcess = false;
-    this._finishedPairs = 0;
+    this._gamePlay = new GamePlay(render, dataProvider, this);
   }
 
   start() {
-    this._createCards();
+    this._gamePlay.createCards();
     this._timer.start();
   }
 
-  _createCards() {
+  _saveResults(playerName) {
+    const store = new Store("gameResults");
+    store.add({ name: playerName, time: this._timer.time });
+  }
+
+  finish() {
+    this._timer.stop();
+    const modal = new Modal(this._saveResults.bind(this));
+    modal.open();
+  }
+}
+
+class GamePlay {
+  constructor(render, dataProvider, game) {
+    this._render = render;
+    this._dataProvider = dataProvider;
+    this._openedCard = null;
+    this._cardInProcess = false;
+    this._finishedPairs = 0;
+    this._game = game;
+  }
+  createCards() {
     const cardLetters = this._dataProvider.getData();
     this.cards = cardLetters.map((letter) => {
       return new Card(
@@ -76,27 +41,16 @@ class Game {
         this._render
       );
     });
-    // return array elements
+
     const cardElements = this.cards.map((item) => {
       return item.element;
     });
     this._render.renderList("#cards-list", cardElements);
   }
 
-  _saveResults(playerName) {
-    const store = new Store("gameResults");
-    store.add({ name: playerName, time: this._timer.time });
-  }
-
-  _finish() {
-    this._timer.stop();
-    const modal = new Modal(this._saveResults.bind(this));
-    modal.open();
-  }
-
   _checkFinishGame() {
     if (this._finishedPairs === this.cards.length / 2) {
-      this._finish();
+      this._game.finish();
     }
   }
 
@@ -131,6 +85,37 @@ class Game {
   }
 }
 
+class DataProvider {
+  getData() {
+    const letters = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+    ];
+    const lettersPairs = [...letters, ...letters];
+    return this._shuffle(lettersPairs);
+  }
+
+  _shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+}
+
 class Card {
   constructor(key, handleClick, render) {
     this._key = key;
@@ -145,14 +130,14 @@ class Card {
    </div>
     `;
 
-    this._element = render.createElement(
-      "div",
-      "cards-list__container",
-      elementContent,
-      () => {
+    this._element = render.createElement({
+      tagName: "div",
+      className: "cards-list__container",
+      content: elementContent,
+      onclick: () => {
         handleClick(this);
-      }
-    );
+      },
+    });
   }
 
   get key() {
@@ -199,7 +184,7 @@ class Timer {
   }
 
   get formatedTime() {
-    return new Date(this.time).toUTCString().split(" ")[4];
+    return TimeFormater.formatTime(this.time);
   }
 
   showTime() {

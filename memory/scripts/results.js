@@ -1,5 +1,5 @@
 class Results {
-  constructor() {
+  constructor(render) {
     const store = new Store("gameResults");
     const resultsData = store.getData();
     resultsData.sort((a, b) => {
@@ -7,17 +7,21 @@ class Results {
       return a.time > b.time ? 1 : -1;
     });
 
-    this._tableBody = document.querySelector(".table__body");
     const tableRowsStrings = resultsData.map(({ name, time }) => {
-      const formatedTime = new Date(time).toUTCString().split(" ")[4];
+      const formatedTime = TimeFormater.formatTime(time);
       return `<tr class="table__row">
       <td class="table__data">${name}</td>
       <td class="table__data">${formatedTime}</td>
     </tr>`;
     });
-    this._tableBody.innerHTML = tableRowsStrings.join("");
+    const tableBodyContent = tableRowsStrings.join("");
+    const tableBody = render.createElement({tagName: "tbody", className: "table__body", content: tableBodyContent});
+    render.renderElement(".page__table", tableBody);
   }
 }
 
-const results = new Results();
+const render = new Render();
+const results = new Results(render);
+
+
 
