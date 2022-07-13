@@ -1,17 +1,5 @@
-class Game {
-  constructor(timer) {
-    this._timer = timer;
-    this._openedCard = null;
-    this._cardInProcess = false;
-    this._finishedPairs = 0;
-  }
-
-  start() {
-    this._createCards();
-    this._timer.start();
-  }
-
-  _createCards() {
+class DataProvider {
+  getData() {
     const letters = [
       "A",
       "B",
@@ -32,25 +20,67 @@ class Game {
       "Q",
       "R",
     ];
-    const cardLetters = [...letters, ...letters];
-    this._shuffle(cardLetters);
-    this.cards = cardLetters.map((letter) => {
-      return new Card(letter, (card) => {
-        this._onCardClick(card);
-      });
-    });
-    this._renderCards();
-  }
-
-  _renderCards() {
-    const cardList = document.getElementById("cards-list");
-    this.cards.forEach((card) => {
-      cardList.appendChild(card.element);
-    });
+    const lettersPairs = [...letters, ...letters];
+    return this._shuffle(lettersPairs);
   }
 
   _shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
+    return array.sort(() => Math.random() - 0.5);
+  }
+}
+
+class Render {
+  renderList(selector, listItems) {
+    const listElement = document.querySelector(selector);
+
+    listItems.forEach((item) => {
+      listElement.appendChild(item);
+    });
+  }
+
+  createElement(tagName, className, content, onclick) {
+    const element = document.createElement(tagName);
+    element.className = className;
+
+    element.innerHTML = content;
+
+    element.onclick = onclick;
+
+    return element;
+  }
+}
+
+class Game {
+  constructor(timer, dataProvider, render) {
+    this._timer = timer;
+    this._dataProvider = dataProvider;
+    this._render = render;
+    this._openedCard = null;
+    this._cardInProcess = false;
+    this._finishedPairs = 0;
+  }
+
+  start() {
+    this._createCards();
+    this._timer.start();
+  }
+
+  _createCards() {
+    const cardLetters = this._dataProvider.getData();
+    this.cards = cardLetters.map((letter) => {
+      return new Card(
+        letter,
+        (card) => {
+          this._onCardClick(card);
+        },
+        this._render
+      );
+    });
+    // return array elements
+    const cardElements = this.cards.map((item) => {
+      return item.element;
+    });
+    this._render.renderList("#cards-list", cardElements);
   }
 
   _saveResults(playerName) {
@@ -102,24 +132,27 @@ class Game {
 }
 
 class Card {
-  constructor(key, handleClick) {
+  constructor(key, handleClick, render) {
     this._key = key;
     this._isFinished = false;
-    this._element = document.createElement("div");
-    this._element.className = "cards-list__container";
 
-    this._element.innerHTML = `
-   <div class="cards-list__card-inner">
-    <div class="cards-list__card-front">
-    </div>
-    <div class="cards-list__card-back">${key}
-    </div>
-  </div>
-   `;
+    const elementContent = `
+    <div class="cards-list__card-inner">
+     <div class="cards-list__card-front">
+     </div>
+     <div class="cards-list__card-back">${key}
+     </div>
+   </div>
+    `;
 
-    this._element.onclick = () => {
-      handleClick(this);
-    };
+    this._element = render.createElement(
+      "div",
+      "cards-list__container",
+      elementContent,
+      () => {
+        handleClick(this);
+      }
+    );
   }
 
   get key() {
@@ -174,7 +207,6 @@ class Timer {
   }
 
   start() {
-    [];
     this._stopTime = null;
     this._startTime = Date.now();
     this._showTimeInterval = setInterval(() => {
@@ -194,10 +226,6 @@ class Timer {
     this._stopTime = null;
   }
 }
-
-const timer = new Timer();
-const game = new Game(timer);
-game.start();
 
 class Modal {
   constructor(onSendClick) {
@@ -225,3 +253,9 @@ class Modal {
     this._modalBlock.classList.remove("modal_active");
   }
 }
+
+const timer = new Timer();
+const dataProvider = new DataProvider();
+const render = new Render();
+const game = new Game(timer, dataProvider, render);
+game.start();
