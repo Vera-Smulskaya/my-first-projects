@@ -78,7 +78,7 @@ body {
 }
 
 .cards-list__card-front {
-  background-image: url(/memory/assets/backgraund.jpeg);
+  background-image: url(../assets/backgraund.jpeg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
