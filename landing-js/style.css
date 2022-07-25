@@ -163,7 +163,7 @@ html {
 
 .header__button:focus {
   outline: none;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 4px 6px rgba(0, 0, 0, 0.8);
 }
 
 .page__start {
@@ -221,7 +221,7 @@ html {
 
 .button-whatsapp:focus {
   outline: none;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 4px 6px rgba(0, 0, 0, 0.8);
 }
 
 .button-whatsapp__icon {
@@ -493,7 +493,6 @@ html {
 @media (min-width: 750px) {
   .header_light {
     background-color: var(--brand-green-light);
-    border-bottom: 1px solid var(--brand-green);
     display: flex;
     justify-content: space-between;
     align-items: center;
