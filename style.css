@@ -1,0 +1,17 @@
+body {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0; 
+}
+
+main {
+margin: auto;
+}
+
+li {
+ padding-top: 200px;
+}
+
+a {
+  text-decoration: none;
+}
