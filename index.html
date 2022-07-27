@@ -14,34 +14,69 @@
         <link rel="stylesheet" href="style.css" type="text/css">
     </head>
     <body>
-        <main>
-            <h1>My projects</h1>
-            <ul>
-                <li>
-                    <a
-                        href="landing-js/index.html"
-                        target="_blank"
-                    >
-                        Landing page
+        <header class="header">
+            <h1 class="header__title">My projects</h1>
+        </header>
+        <main class="main">    
+            <ul class="main__list list">
+                <li class="list__project project">
+                    <a href="landing-js/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Landing page</h2>
+                            <p class="project__text">Page with adaptive design for tablets and mobile phones. Implementation of a drop-down menu, modal window and page navigation using the menu.</p>
+                        </div>
+                        <img src="img-projects/Landing.png" alt="Landing page" class="project__img"> 
                     </a>
                 </li>
-                <li>
-                    <a
-                        href="memory/menu/index.html"
-                        target="_blank"
-                    >
-                        Memory game
+                <li class="list__project project">
+                    <a href="memory/menu/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Memory game</h2>
+                            <p class="project__text">Implementation of a memory game using OOP principles. Storing game results in Local Storage and displaying them in a table.</p>
+                        </div>
+                        <img src="img-projects/Memory-game.png" alt="Memory game" class="project__img"> 
                     </a>
                 </li>
-                <li>
-                    <a
-                        href="table/index.html"
-                        target="_blank"
-                    >
-                        Table
+                <li class="list__project project">
+                    <a href="table/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Table</h2>
+                            <p class="project__text">Creating a table using DOM. Apply different types of filters and sort table contents.</p>
+                        </div>
+                        <img src="img-projects/Table.png" alt="Table" class="project__img">
+                    </a>
+                </li>
+                <li class="list__project project">
+                    <a href="css-js-clock/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Clock</h2>
+                            <p class="project__text">Real-time clock implementation.</p>
+                        </div>
+                        <img src="img-projects/Clock.png" alt="Clock" class="project__img"> 
+                    </a>
+                </li>
+                <li class="list__project project">
+                    <a href="playing-with-css-variables-and-js/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Playing with variables</h2>
+                            <p class="project__text">Using CSS variables to create interesting interactivity.</p>
+                        </div>
+                        <img src="img-projects/Variables-CSS.png" alt="Change picture" class="project__img">
+                    </a>
+                </li>
+                <li class="list__project project">
+                    <a href="js-drum-kit/index.html" target="_blank">
+                        <div class="project__discription">
+                            <h2 class="project__title">Drum kit</h2>
+                            <p class="project__text">Implementing a Drum Set with vanilla JS</p>
+                        </div>
+                        <img src="img-projects/Drum-kits.png" alt="Drum kit" class="project__img"> 
                     </a>
                 </li>
             </ul>
         </main>
+        <footer>
+
+        </footer>
     </body>
 </html>
